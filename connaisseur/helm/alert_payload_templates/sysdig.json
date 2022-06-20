@@ -1,0 +1,23 @@
+{
+    "events": [
+        {
+            "timestamp": "{{ timestamp }}",
+            "rule": "Check image signature",
+            "priority": "alert",
+            "output": "The image signature verification failed for image {{ images }}",
+            "source": "Connaisseur AC",
+            "tags": [
+                "containerUnsigned",
+                "k8s"
+            ],
+            "output_fields": {
+                "message": "{{ alert_message }}",
+                "pod": "{{ connaisseur_pod_id }}"
+            }
+        }
+    ],
+    "labels": {
+        "cluster": "{{ cluster }}",
+        "namespace": "{{ namespace }}"
+    }
+}
