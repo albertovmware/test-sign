@@ -37,6 +37,7 @@ jobs:
         if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 -n libre
       - name: Deploy unsigned in default ns with warning
+        if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 
       - name: Deploy signed image in libre ns
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/firmada:v1 -n libre
