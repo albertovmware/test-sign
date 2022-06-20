@@ -28,9 +28,18 @@ jobs:
           echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
           cat ${HOME}/.kube/config
       - name: Use Context
+        run: kubectl config use-context aks-cluster1-admin
+      - name: Delete previous test
         run: |
-          kubectl config use-context aks-cluster1-admin
-          kubectl get po -A
-      - name: Run a multi-line script
-        run: sleep 5
+          kubectl delete po demo0
+          kubectl delete po demo0 -n libre
+      - name: Try to deploy unsigned in libre ns
+        run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 -n libre
+      - name: Deploy unsigned in default ns with warning
+        run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 
+      - name: Deploy signed image in libre ns
+        run: kubectl run demo0 --image=harbor.albertito.es/cosign/firmada:v1 -n libre
+      - name: Show deployed images
+        run: kubectl get po -A | grep demo
+
 
