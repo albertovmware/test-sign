@@ -17,3 +17,5 @@ helm install connaisseur helm --atomic --create-namespace --namespace connaisseu
 ```console
 helm install connaisseurd helm --atomic --create-namespace --namespace connaisseurd
 ```
+
+To test the image deployment on the cluster, go through actions, and run the workflow run-images

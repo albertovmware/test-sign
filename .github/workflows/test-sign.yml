@@ -30,20 +30,18 @@ jobs:
       - name: Use Context
         run: kubectl config use-context aks-cluster1-admin
       - name: Delete previous test
+        continue-on-error: true
         run: |
           kubectl delete po demo0
           kubectl delete po demo0 -n libre
       - name: Try to deploy unsigned in libre ns
-        if: always()
+        continue-on-error: true
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 -n libre
       - name: Deploy unsigned in default ns with warning
-        if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 
       - name: Deploy signed image in libre ns
-        if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/firmada:v1 -n libre
       - name: Show deployed images
-        if: always()
         run: kubectl get po -A | grep demo
 
 
