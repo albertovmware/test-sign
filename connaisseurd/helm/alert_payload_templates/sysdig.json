@@ -1,0 +1,23 @@
+{
+    "events": [
+        {
+            "timestamp": "{{ timestamp }}",
+            "rule": "Check image signature",
+            "priority": "warning",
+            "output": "The image signature verification failed for image {{ images }}, but deployed as is not a validated namespace",
+            "source": "Connaisseur AC",
+            "tags": [
+                "containerUnsigned",
+                "ContainerDeployed"
+            ],
+            "output_fields": {
+                "message": "{{ alert_message }}",
+                "pod": "{{ connaisseur_pod_id }}"
+            }
+        }
+    ],
+    "labels": {
+        "cluster": "{{ cluster }}",
+        "namespace": "{{ namespace }}"
+    }
+}
