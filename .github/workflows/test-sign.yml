@@ -40,8 +40,10 @@ jobs:
         if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/nofirmada:v1 
       - name: Deploy signed image in libre ns
+        if: always()
         run: kubectl run demo0 --image=harbor.albertito.es/cosign/firmada:v1 -n libre
       - name: Show deployed images
+        if: always()
         run: kubectl get po -A | grep demo
 
 
