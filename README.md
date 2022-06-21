@@ -20,3 +20,9 @@ helm install connaisseurd helm --atomic --create-namespace --namespace connaisse
 
 To test the image deployment on the cluster, go through actions, and run the workflow run-images.
 ![](https://github.com/albertovmware/test-sign/blob/main/img/github.gif)
+
+To run the github action workflow manually outside the repo, use this curl
+
+```console
+curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token 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" https://api.github.com/repos/albertovmware/test-sign/actions/workflows/28611041/dispatches -d '{"ref":"main""}}'
+```
